@@ -1,0 +1,16 @@
+{
+	"apiVersion": 2,
+	"name": "innocode/block-cards",
+    "version": "1.0.0",
+    "title": "Cards",
+	"category": "design",
+	"description": "List for cards.",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "innocode-block-cards",
+	"editorScript": "file:./build/index.js",
+    "script": "file:./build/view.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}

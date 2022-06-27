@@ -1,0 +1,16 @@
+{
+	"apiVersion": 2,
+	"name": "innocode/block-card",
+    "version": "1.0.0",
+    "title": "Card",
+	"category": "design",
+	"description": "Card with an image, title, description and link.",
+	"supports": {
+		"html": false
+	},
+    "parent": ["innocode/block-cards"],
+	"textdomain": "innocode-block-cards",
+	"editorScript": "file:./build/index.js",
+	"editorStyle": "file:./build/index.css",
+	"style": "file:./build/style-index.css"
+}

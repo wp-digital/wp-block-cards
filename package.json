@@ -1,0 +1,36 @@
+{
+	"name": "wp-block-cards",
+	"version": "1.0.0",
+	"description": "Grid or carousel with card blocks which have an image, title, description and link.",
+	"author": "Innocode",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build:card": "wp-scripts build blocks/card/src/index.js --output-path=blocks/card/build/",
+		"build:container": "wp-scripts build blocks/container/src/index.js blocks/container/src/view.js --output-path=blocks/container/build/",
+		"build": "npm run build:card && npm run build:container",
+		"format": "wp-scripts format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:css:fix": "wp-scripts lint-style --fix",
+		"lint:js": "wp-scripts lint-js",
+		"lint:js:fix": "wp-scripts lint-js --fix",
+		"start:card": "wp-scripts start blocks/card/src/index.js --output-path=blocks/card/build/",
+		"start:container": "wp-scripts start blocks/container/src/index.js --output-path=blocks/container/build/",
+		"packages-update": "wp-scripts packages-update"
+	},
+	"dependencies": {
+		"@wordpress/block-editor": "^8.0.11",
+		"@wordpress/blocks": "^11.1.4",
+		"@wordpress/components": "^19.1.6",
+		"@wordpress/dom-ready": "^3.2.3",
+		"@wordpress/element": "^4.0.4",
+		"@wordpress/hooks": "^3.2.2",
+		"@wordpress/i18n": "^4.2.4",
+		"@wordpress/icons": "^9.2.0",
+		"@wordpress/primitives": "^3.0.4"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^19.2.2",
+		"prettier": "^2.5.1"
+	}
+}
