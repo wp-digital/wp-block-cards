@@ -13,6 +13,7 @@ registerBlockType('innocode/block-card', {
 		className: false,
 	},
 	attributes,
+	usesContext: ['innocode/block-cards-cardType', 'innocode/block-cards-imageWidth', 'innocode/block-cards-imageHeight'],
 	edit: Edit,
 	save,
 	icon,

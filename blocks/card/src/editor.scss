@@ -1,0 +1,29 @@
+/* stylelint-disable selector-class-pattern */
+.editor-styles-wrapper {
+
+	.innocode-block-card {
+
+		.innocode-block-card__link,
+		.innocode-block-card__email {
+			color: #7ea7ac;
+		}
+
+		&__upload {
+			display: block;
+			width: 100%;
+			height: 100%;
+			border-radius: 0;
+
+			&.no-image {
+				background: #fff;
+			}
+		}
+
+		&__footer {
+
+			a {
+				outline: none !important;
+			}
+		}
+	}
+}

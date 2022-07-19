@@ -1,3 +1,4 @@
+/* stylelint-disable selector-class-pattern */
 .innocode-block-cards {
 	margin-bottom: 1em;
 
@@ -9,4 +10,28 @@
 	&__description {
 		text-align: center;
 	}
+
+	&__list,
+	.block-editor-block-list__layout {
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 25px;
+	}
+
+	&.grid-4 {
+
+		.innocode-block-cards__list,
+		.block-editor-block-list__layout {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+	}
+
+	&.grid-3 {
+
+		.innocode-block-cards__list,
+		.block-editor-block-list__layout {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
 }

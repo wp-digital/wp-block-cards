@@ -10,10 +10,15 @@ import './style.scss';
 registerBlockType('innocode/block-cards', {
 	apiVersion: 2,
 	supports: {
-		align: ['center', 'wide', 'full'],
+		align: ['wide', 'full'],
 		className: false,
 	},
 	attributes,
+	providesContext: {
+		'innocode/block-cards-cardType': 'cardType',
+		'innocode/block-cards-imageWidth': 'imageWidth',
+		'innocode/block-cards-imageHeight': 'imageHeight',
+	},
 	edit: Edit,
 	save,
 	icon,
