@@ -1,14 +1,14 @@
 import { useBlockProps, InnerBlocks, RichText } from '@wordpress/block-editor';
 
-import { BLOCK_CLASS_NAME } from './constants';
 import {
+	BLOCK_CLASS_NAME,
 	TITLE_TAG,
 	HAS_TITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
 	TYPE_DEFAULT,
-	ALLOWED_BLOCKS,
 	CARDS_IN_ROW_DEFAULT,
-} from './constants/editor';
+} from './constants';
+import { ALLOWED_BLOCKS } from './constants/editor';
 
 export default function save({ attributes }) {
 	const {

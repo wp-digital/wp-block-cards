@@ -1,7 +1,16 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { CARD_TYPE_CONTACT, CARD_TYPE_DEF } from '../../container/src/constants/editor';
+import { CARD_TYPE_CONTACT, CARD_TYPE_DEF } from '../../container/src/constants';
 
-import { BLOCK_CLASS_NAME, TITLE_TAG, IMAGE_DEFAULT } from './constants';
+import {
+	BLOCK_CLASS_NAME,
+	TITLE_TAG,
+	IMAGE_DEFAULT,
+	HAS_IMAGE_DEFAULT,
+	HAS_DESCRIPTION_DEFAULT,
+	HAS_LINK_DEFAULT,
+	HAS_PHONE_DEFAULT,
+	HAS_EMAIL_DEFAULT,
+} from './constants';
 
 export default function save({ attributes }) {
 	const {
@@ -19,6 +28,11 @@ export default function save({ attributes }) {
 		cardType,
 		imageContainerWidth,
 		imageContainerHeight,
+		hasImage = HAS_IMAGE_DEFAULT,
+		hasDescription = HAS_DESCRIPTION_DEFAULT,
+		hasLink = HAS_LINK_DEFAULT,
+		hasPhone = HAS_PHONE_DEFAULT,
+		hasEmail = HAS_EMAIL_DEFAULT,
 	} = attributes;
 
 	return (
@@ -27,7 +41,7 @@ export default function save({ attributes }) {
 				className: `${BLOCK_CLASS_NAME} ${cardType}`,
 			})}
 		>
-			{!!imageSrc && (
+			{hasImage && !!imageSrc && (
 				<div
 					className={`${BLOCK_CLASS_NAME}__image`}
 					style={{ width: imageContainerWidth, height: imageContainerHeight }}
@@ -36,24 +50,29 @@ export default function save({ attributes }) {
 				</div>
 			)}
 			<RichText.Content tagName={TITLE_TAG} value={title} className={`${BLOCK_CLASS_NAME}__title`} />
-			{!!description && (
+			{hasDescription && !!description && (
 				<RichText.Content tagName="div" value={description} className={`${BLOCK_CLASS_NAME}__description`} />
 			)}
-			{cardType === CARD_TYPE_DEF && !!linkText && !!linkHref && (
+			{hasLink && cardType === CARD_TYPE_DEF && !!linkText && !!linkHref && (
 				<footer className={`${BLOCK_CLASS_NAME}__footer`}>
-					<a href={linkHref} className={`${BLOCK_CLASS_NAME}__link`} target={linkTarget}>
+					<a
+						href={linkHref}
+						className={`${BLOCK_CLASS_NAME}__link`}
+						target={linkTarget}
+						rel={linkTarget === '_blank' ? 'noopener' : undefined}
+					>
 						{linkText}
 					</a>
 				</footer>
 			)}
-			{cardType === CARD_TYPE_CONTACT && (!!phone || !!email) && (
+			{cardType === CARD_TYPE_CONTACT && (hasPhone || hasEmail) && (!!phone || !!email) && (
 				<footer className={`${BLOCK_CLASS_NAME}__footer`}>
-					{!!phone && (
+					{hasPhone && !!phone && (
 						<a href={`tel:${phone.replace(/\(0\)|\s+/g, '')}`} className={`${BLOCK_CLASS_NAME}__phone`}>
 							{phone}
 						</a>
 					)}
-					{!!email && (
+					{hasEmail && !!email && (
 						<a href={`mailto:${email}`} className={`${BLOCK_CLASS_NAME}__email`}>
 							{email}
 						</a>

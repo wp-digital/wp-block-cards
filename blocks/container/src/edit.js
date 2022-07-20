@@ -2,22 +2,22 @@ import { useBlockProps, InnerBlocks, InspectorControls, RichText } from '@wordpr
 import { PanelBody, PanelRow, ToggleControl, RadioControl, TextControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
-import { BLOCK_CLASS_NAME } from './constants';
+import { ALLOWED_BLOCKS } from './constants/editor';
 import {
+	BLOCK_CLASS_NAME,
 	TITLE_TAG,
 	HAS_TITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
 	TYPE_DEFAULT,
 	TYPE_GRID,
 	TYPE_SLIDER,
-	ALLOWED_BLOCKS,
 	CARD_TYPE_DEFAULT,
 	IMAGE_WIDTH_DEFAULT,
 	IMAGE_HEIGHT_DEFAULT,
 	CARD_TYPE_DEF,
 	CARD_TYPE_CONTACT,
 	CARDS_IN_ROW_DEFAULT,
-} from './constants/editor';
+} from './constants';
 
 import './editor.scss';
 

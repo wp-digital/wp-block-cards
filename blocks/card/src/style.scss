@@ -65,6 +65,10 @@
 		text-decoration: none;
 	}
 
+	&__email:not(:only-child) {
+		margin-top: 5px;
+	}
+
 	&.contact {
 
 		.innocode-block-card__description {

@@ -1,5 +1,13 @@
-import { CARD_TYPE_DEF, CARD_TYPE_CONTACT, CARD_TYPE_DEFAULT } from '../../container/src/constants/editor';
-import { BLOCK_CLASS_NAME, IMAGE_DEFAULT } from './constants';
+import { CARD_TYPE_DEF, CARD_TYPE_CONTACT, CARD_TYPE_DEFAULT } from '../../container/src/constants';
+import {
+	BLOCK_CLASS_NAME,
+	IMAGE_DEFAULT,
+	HAS_DESCRIPTION_DEFAULT,
+	HAS_IMAGE_DEFAULT,
+	HAS_LINK_DEFAULT,
+	HAS_PHONE_DEFAULT,
+	HAS_EMAIL_DEFAULT,
+} from './constants';
 
 export default {
 	attachmentId: {
@@ -55,10 +63,6 @@ export default {
 		source: 'html',
 		selector: `.${BLOCK_CLASS_NAME}__description`,
 	},
-	// hasDescription: {
-	// 	type: 'boolean',
-	// 	default: HAS_DESCRIPTION_DEFAULT,
-	// },
 	linkText: {
 		type: 'string',
 		source: 'html',
@@ -85,5 +89,25 @@ export default {
 		type: 'string',
 		source: 'html',
 		selector: `.${BLOCK_CLASS_NAME}__email`,
+	},
+	hasImage: {
+		type: 'boolean',
+		default: HAS_IMAGE_DEFAULT,
+	},
+	hasDescription: {
+		type: 'boolean',
+		default: HAS_DESCRIPTION_DEFAULT,
+	},
+	hasLink: {
+		type: 'boolean',
+		default: HAS_LINK_DEFAULT,
+	},
+	hasPhone: {
+		type: 'boolean',
+		default: HAS_PHONE_DEFAULT,
+	},
+	hasEmail: {
+		type: 'boolean',
+		default: HAS_EMAIL_DEFAULT,
 	},
 };

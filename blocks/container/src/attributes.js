@@ -1,5 +1,5 @@
-import { BLOCK_CLASS_NAME } from './constants';
 import {
+	BLOCK_CLASS_NAME,
 	HAS_TITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
 	TYPE_DEFAULT,
@@ -11,7 +11,7 @@ import {
 	CARD_TYPE_DEF,
 	CARD_TYPE_CONTACT,
 	CARDS_IN_ROW_DEFAULT,
-} from './constants/editor';
+} from './constants';
 
 export default {
 	hasTitle: {
