@@ -5,7 +5,7 @@ import {
 	TITLE_TAG,
 	HAS_TITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
-	TYPE_DEFAULT,
+	// TYPE_DEFAULT,
 	CARDS_IN_ROW_DEFAULT,
 } from './constants';
 import { ALLOWED_BLOCKS } from './constants/editor';
@@ -16,14 +16,14 @@ export default function save({ attributes }) {
 		title,
 		hasDescription = HAS_DESCRIPTION_DEFAULT,
 		description,
-		type = TYPE_DEFAULT,
+		// type = TYPE_DEFAULT,
 		cardsInRow = CARDS_IN_ROW_DEFAULT,
 	} = attributes;
 
 	return (
 		<div
 			{...useBlockProps.save({
-				className: `${BLOCK_CLASS_NAME} ${type} grid-${cardsInRow}`,
+				className: `${BLOCK_CLASS_NAME} grid-${cardsInRow}`,
 			})}
 		>
 			<div className={`${BLOCK_CLASS_NAME}__header`}>

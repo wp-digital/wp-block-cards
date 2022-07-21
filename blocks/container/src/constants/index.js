@@ -7,9 +7,9 @@ export const TITLE_TAG = applyFilters('innocode.block-cards.title.tag', 'h2');
 export const HAS_TITLE_DEFAULT = applyFilters('innocode.block-cards.has_title.default', true);
 export const HAS_DESCRIPTION_DEFAULT = applyFilters('innocode.block-cards.has_description.default', false);
 
-export const TYPE_GRID = 'grid';
-export const TYPE_SLIDER = 'slider';
-export const TYPE_DEFAULT = applyFilters('innocode.block-cards.type.default', TYPE_GRID);
+// export const TYPE_GRID = 'grid';
+// export const TYPE_SLIDER = 'slider';
+// export const TYPE_DEFAULT = applyFilters('innocode.block-cards.type.default', TYPE_GRID);
 
 export const CARD_TYPE_DEF = 'default';
 export const CARD_TYPE_CONTACT = 'contact';

@@ -8,9 +8,9 @@ import {
 	TITLE_TAG,
 	HAS_TITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
-	TYPE_DEFAULT,
-	TYPE_GRID,
-	TYPE_SLIDER,
+	// TYPE_DEFAULT,
+	// TYPE_GRID,
+	// TYPE_SLIDER,
 	CARD_TYPE_DEFAULT,
 	IMAGE_WIDTH_DEFAULT,
 	IMAGE_HEIGHT_DEFAULT,
@@ -27,7 +27,7 @@ export default function Edit({ attributes, setAttributes }) {
 		title,
 		hasDescription = HAS_DESCRIPTION_DEFAULT,
 		description,
-		type = TYPE_DEFAULT,
+		// type = TYPE_DEFAULT,
 		cardType = CARD_TYPE_DEFAULT,
 		imageWidth = IMAGE_WIDTH_DEFAULT,
 		imageHeight = IMAGE_HEIGHT_DEFAULT,
@@ -42,7 +42,7 @@ export default function Edit({ attributes, setAttributes }) {
 	const onTitleChange = (value) => onChange('title', value);
 	const onHasDescriptionChange = () => onChange('hasDescription', !hasDescription);
 	const onDescriptionChange = (value) => onChange('description', value);
-	const onTypeChange = (value) => onChange('type', value);
+	// const onTypeChange = (value) => onChange('type', value);
 	const onCardTypeChange = (value) => onChange('cardType', value);
 	const onImageWidthChange = (value) => onChange('imageWidth', value);
 	const onImageHeightChange = (value) => onChange('imageHeight', value);
@@ -51,7 +51,7 @@ export default function Edit({ attributes, setAttributes }) {
 	return (
 		<div
 			{...useBlockProps({
-				className: `${BLOCK_CLASS_NAME} ${type} grid-${cardsInRow}`,
+				className: `${BLOCK_CLASS_NAME} grid-${cardsInRow}`,
 			})}
 		>
 			<InspectorControls>
@@ -70,7 +70,7 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={onHasDescriptionChange}
 						/>
 					</PanelRow>
-					<PanelRow>
+					{/* <PanelRow>
 						<RadioControl
 							label={__('Block type', 'innocode-block-cards')}
 							selected={type}
@@ -86,30 +86,30 @@ export default function Edit({ attributes, setAttributes }) {
 							]}
 							onChange={onTypeChange}
 						/>
+					</PanelRow> */}
+					{/* {type === TYPE_GRID && ( */}
+					<PanelRow>
+						<RadioControl
+							label={__('Cards in row', 'innocode-block-cards')}
+							selected={cardsInRow}
+							options={[
+								{
+									label: __('6', 'innocode-block-cards'),
+									value: '6',
+								},
+								{
+									label: __('4', 'innocode-block-cards'),
+									value: '4',
+								},
+								{
+									label: __('3', 'innocode-block-cards'),
+									value: '3',
+								},
+							]}
+							onChange={onCardsInRowChange}
+						/>
 					</PanelRow>
-					{type === TYPE_GRID && (
-						<PanelRow>
-							<RadioControl
-								label={__('Cards in row', 'innocode-block-cards')}
-								selected={cardsInRow}
-								options={[
-									{
-										label: __('6', 'innocode-block-cards'),
-										value: '6',
-									},
-									{
-										label: __('4', 'innocode-block-cards'),
-										value: '4',
-									},
-									{
-										label: __('3', 'innocode-block-cards'),
-										value: '3',
-									},
-								]}
-								onChange={onCardsInRowChange}
-							/>
-						</PanelRow>
-					)}
+					{/* )} */}
 					<PanelRow>
 						<RadioControl
 							label={__('Card type', 'innocode-block-cards')}
