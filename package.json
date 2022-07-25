@@ -7,7 +7,7 @@
 	"main": "build/index.js",
 	"scripts": {
 		"build:card": "wp-scripts build blocks/card/src/index.js --output-path=blocks/card/build/",
-		"build:container": "wp-scripts build blocks/container/src/index.js blocks/container/src/view.js --output-path=blocks/container/build/",
+		"build:container": "wp-scripts build blocks/container/src/index.js --output-path=blocks/container/build/",
 		"build": "npm run build:card && npm run build:container",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
