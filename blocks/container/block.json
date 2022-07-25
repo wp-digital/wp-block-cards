@@ -10,7 +10,6 @@
 	},
 	"textdomain": "innocode-block-cards",
 	"editorScript": "file:./build/index.js",
-    "script": "file:./build/view.js",
 	"editorStyle": "file:./build/index.css",
 	"style": "file:./build/style-index.css"
 }
