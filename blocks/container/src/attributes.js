@@ -1,16 +1,13 @@
 import {
 	BLOCK_CLASS_NAME,
+	TYPE_DEFAULT,
+	TYPE_CONTACT,
 	HAS_TITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
-	// TYPE_DEFAULT,
-	// TYPE_GRID,
-	// TYPE_SLIDER,
 	IMAGE_WIDTH_DEFAULT,
 	IMAGE_HEIGHT_DEFAULT,
-	CARD_TYPE_DEFAULT,
-	CARD_TYPE_DEF,
-	CARD_TYPE_CONTACT,
-	CARDS_IN_ROW_DEFAULT,
+	COLUMNS_MAX,
+	COLUMNS_DEFAULT,
 } from './constants';
 
 export default {
@@ -32,31 +29,23 @@ export default {
 		source: 'html',
 		selector: `.${BLOCK_CLASS_NAME}__description`,
 	},
-	// type: {
-	// 	type: 'string',
-	// 	default: TYPE_DEFAULT,
-	// 	enum: [TYPE_GRID, TYPE_SLIDER],
-	// },
 	cardType: {
 		type: 'string',
-		default: CARD_TYPE_DEFAULT,
-		enum: [CARD_TYPE_DEF, CARD_TYPE_CONTACT],
+		default: TYPE_DEFAULT,
+		enum: [TYPE_DEFAULT, TYPE_CONTACT],
 	},
 	imageWidth: {
-		type: 'string',
+		type: 'integer',
 		default: IMAGE_WIDTH_DEFAULT,
 	},
 	imageHeight: {
-		type: 'string',
+		type: 'integer',
 		default: IMAGE_HEIGHT_DEFAULT,
 	},
-	cardsInRow: {
-		type: 'string',
-		default: CARDS_IN_ROW_DEFAULT,
-		enum: ['6', '4', '3'],
-	},
-	align: {
-		type: 'string',
-		default: 'wide',
+	columns: {
+		type: 'integer',
+		minimum: 1,
+		maximum: COLUMNS_MAX,
+		default: COLUMNS_DEFAULT,
 	},
 };

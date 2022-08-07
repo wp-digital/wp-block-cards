@@ -1,138 +1,184 @@
-import { useState, useEffect } from '@wordpress/element';
+import { defer, has } from 'lodash';
+
+import { useState, useEffect, useRef } from '@wordpress/element';
 import {
 	useBlockProps,
 	RichText,
 	MediaUpload,
 	MediaUploadCheck,
+	InspectorControls,
 	/* eslint-disable-next-line @wordpress/no-unsafe-wp-apis */
 	__experimentalLinkControl as LinkControl,
-	InspectorControls,
 } from '@wordpress/block-editor';
-import { Popover, Button, PanelBody, PanelRow, ToggleControl } from '@wordpress/components';
-
+import { Popover, Button, PanelBody, PanelRow, ToggleControl, Icon, Spinner } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { link } from '@wordpress/icons';
 
 import {
 	BLOCK_CLASS_NAME,
-	TITLE_TAG,
-	IMAGE_DEFAULT,
+	NEW_TAB_REL,
+	TYPE_DEFAULT,
+	TYPE_CONTACT,
 	HAS_IMAGE_DEFAULT,
+	IMAGE_SIZE,
+	ALLOWED_IMAGE_TYPES,
+	IMAGE_DEFAULT,
+	TITLE_TAG,
+	HAS_TOP_SUBTITLE_DEFAULT,
+	HAS_BOTTOM_SUBTITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
 	HAS_LINK_DEFAULT,
 	HAS_PHONE_DEFAULT,
 	HAS_EMAIL_DEFAULT,
 } from './constants';
-import { ALLOWED_IMAGE_TYPES } from './constants/editor';
-import { CARD_TYPE_CONTACT, CARD_TYPE_DEF } from '../../container/src/constants';
 
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, context }) {
+	const linkURLInputRef = useRef(null);
+	const linkTextInputRef = useRef(null);
 	const {
+		hasImage = HAS_IMAGE_DEFAULT,
 		attachmentId,
 		imageSrc = IMAGE_DEFAULT.src,
 		imageWidth = IMAGE_DEFAULT.width,
 		imageHeight = IMAGE_DEFAULT.height,
 		imageAlt = IMAGE_DEFAULT.alt,
 		title,
-		description,
-		linkText,
-		linkHref,
-		linkTarget,
-		phone = '',
-		email,
-		hasImage = HAS_IMAGE_DEFAULT,
+		hasTopSubtitle = HAS_TOP_SUBTITLE_DEFAULT,
+		topSubtitle,
+		hasBottomSubtitle = HAS_BOTTOM_SUBTITLE_DEFAULT,
+		bottomSubtitle,
 		hasDescription = HAS_DESCRIPTION_DEFAULT,
+		description,
 		hasLink = HAS_LINK_DEFAULT,
+		linkHref,
+		linkText,
+		linkTarget,
+		linkRel,
 		hasPhone = HAS_PHONE_DEFAULT,
+		phone,
 		hasEmail = HAS_EMAIL_DEFAULT,
+		email,
 	} = attributes;
-
 	const {
-		'innocode/block-cards-cardType': cardType,
+		'innocode/block-cards-cardType': type,
 		'innocode/block-cards-imageWidth': imageContainerWidth,
 		'innocode/block-cards-imageHeight': imageContainerHeight,
 	} = context;
-
 	const [isEditingURL, setIsEditingURL] = useState(false);
-
-	useEffect(() => {
-		setAttributes({ cardType, imageContainerWidth, imageContainerHeight });
-	}, [cardType, imageContainerWidth, imageContainerHeight]);
+	const opensLinkInNewTab = linkTarget === '_blank';
 
 	const onChange = (key, value) => {
 		setAttributes({ [key]: value });
 	};
 
-	const onImageSelect = (media) => {
-		setAttributes({
+	const onHasImageChange = () => onChange('hasImage', !hasImage);
+	const onImageChange = (media) => {
+		const newAttributes = {
 			attachmentId: media.id,
 			imageAlt: media.alt || media.filename,
-			imageSrc: media.url,
-			imageWidth: media.width,
-			imageHeight: media.height,
+		};
+
+		if (has(media, ['sizes', IMAGE_SIZE])) {
+			newAttributes.imageSrc = media.sizes[IMAGE_SIZE].url;
+			newAttributes.imageWidth = media.sizes[IMAGE_SIZE].width;
+			newAttributes.imageHeight = media.sizes[IMAGE_SIZE].height;
+		} else {
+			newAttributes.imageSrc = media.url;
+			newAttributes.imageWidth = media.width;
+			newAttributes.imageHeight = media.height;
+		}
+
+		setAttributes(newAttributes);
+	};
+	const onImageRemove = () => {
+		setAttributes({
+			attachmentId: 0,
+			imageSrc: IMAGE_DEFAULT.src,
+			imageWidth: IMAGE_DEFAULT.width,
+			imageHeight: IMAGE_DEFAULT.height,
+			imageAlt: IMAGE_DEFAULT.alt,
 		});
 	};
-
 	const onTitleChange = (value) => onChange('title', value);
+	const onHasTopSubtitleChange = () => onChange('hasTopSubtitle', !hasTopSubtitle);
+	const onTopSubtitleChange = (value) => onChange('topSubtitle', value);
+	const onHasBottomSubtitleChange = () => onChange('hasBottomSubtitle', !hasBottomSubtitle);
+	const onBottomSubtitleChange = (value) => onChange('bottomSubtitle', value);
+	const onHasDescriptionChange = () => onChange('hasDescription', !hasDescription);
 	const onDescriptionChange = (value) => onChange('description', value);
-	const onPhoneChange = (value) => onChange('phone', value);
-	const onEmailChange = (value) => onChange('email', value);
-	const onLinkTextChange = (value) => onChange('linkText', value);
+	const onHasLinkChange = () => onChange('hasLink', !hasLink);
+	const onToggleOpenLinkInNewTab = (value) => {
+		const newTarget = value ? '_blank' : undefined;
+
+		let updatedRel = linkRel;
+
+		if (newTarget && !linkRel) {
+			updatedRel = NEW_TAB_REL;
+		} else if (!newTarget && linkRel === NEW_TAB_REL) {
+			updatedRel = undefined;
+		}
+
+		setAttributes({
+			linkTarget: newTarget,
+			linkRel: updatedRel,
+		});
+	};
 	const onLinkChange = ({ url: newURL = '', opensInNewTab }) => {
 		onChange('linkHref', newURL);
-		onChange('linkTarget', opensInNewTab ? '_blank' : undefined);
+
+		if (opensLinkInNewTab !== opensInNewTab) {
+			onToggleOpenLinkInNewTab(opensInNewTab);
+		}
 	};
-	const onHasImageChange = (value) => onChange('hasImage', value);
-	const onHasDescriptionChange = (value) => onChange('hasDescription', value);
-	const onHasLinkChange = (value) => onChange('hasLink', value);
-	const onHasPhoneChange = (value) => onChange('hasPhone', value);
-	const onHasEmailChange = (value) => onChange('hasEmail', value);
+	const onLinkTextChange = (value) => onChange('linkText', value);
+	const onHasPhoneChange = () => onChange('hasPhone', !hasPhone);
+	const onPhoneChange = (value) => onChange('phone', value);
+	const onHasEmailChange = () => onChange('hasEmail', !hasEmail);
+	const onEmailChange = (value) => onChange('email', value);
+
+	const startEditingURL = () => setIsEditingURL(true);
+	const stopEditingURL = () => setIsEditingURL(false);
+
+	useEffect(() => {
+		setAttributes({ type, imageContainerWidth, imageContainerHeight });
+	}, [type, imageContainerWidth, imageContainerHeight]);
 
 	return (
 		<div
 			{...useBlockProps({
-				className: `${BLOCK_CLASS_NAME} ${cardType}`,
+				className: `${BLOCK_CLASS_NAME} ${BLOCK_CLASS_NAME}_${type}`,
 			})}
 		>
 			<InspectorControls>
-				<PanelBody title={__('Settings', 'innocode-block-cards')}>
+				<PanelBody title={__('Settings', 'innocode-blocks')}>
 					<PanelRow>
-						<ToggleControl
-							label={__('Show image', 'innocode-block-cards')}
-							checked={hasImage}
-							onChange={onHasImageChange}
-						/>
+						<ToggleControl label={__('Show image', 'innocode-blocks')} checked={hasImage} onChange={onHasImageChange} />
 					</PanelRow>
 					<PanelRow>
 						<ToggleControl
-							label={__('Show description', 'innocode-block-cards')}
+							label={__('Show description', 'innocode-blocks')}
 							checked={hasDescription}
 							onChange={onHasDescriptionChange}
 						/>
 					</PanelRow>
-					{cardType === CARD_TYPE_DEF && (
+					{type === TYPE_DEFAULT && (
 						<PanelRow>
-							<ToggleControl
-								label={__('Show link', 'innocode-block-cards')}
-								checked={hasLink}
-								onChange={onHasLinkChange}
-							/>
+							<ToggleControl label={__('Show link', 'innocode-blocks')} checked={hasLink} onChange={onHasLinkChange} />
 						</PanelRow>
 					)}
-					{cardType === CARD_TYPE_CONTACT && (
+					{type === TYPE_CONTACT && (
 						<>
 							<PanelRow>
 								<ToggleControl
-									label={__('Show phone', 'innocode-block-cards')}
+									label={__('Show phone', 'innocode-blocks')}
 									checked={hasPhone}
 									onChange={onHasPhoneChange}
 								/>
 							</PanelRow>
 							<PanelRow>
 								<ToggleControl
-									label={__('Show email', 'innocode-block-cards')}
+									label={__('Show email', 'innocode-blocks')}
 									checked={hasEmail}
 									onChange={onHasEmailChange}
 								/>
@@ -140,106 +186,180 @@ export default function Edit({ attributes, setAttributes, context }) {
 						</>
 					)}
 				</PanelBody>
+				<PanelBody title={__('Subtitle Settings', 'innocode-blocks')} initialOpen={false}>
+					<PanelRow>
+						<ToggleControl
+							label={__('Show before title', 'innocode-blocks')}
+							checked={hasTopSubtitle}
+							onChange={onHasTopSubtitleChange}
+						/>
+					</PanelRow>
+					<PanelRow>
+						<ToggleControl
+							label={__('Show after title', 'innocode-blocks')}
+							checked={hasBottomSubtitle}
+							onChange={onHasBottomSubtitleChange}
+						/>
+					</PanelRow>
+				</PanelBody>
 			</InspectorControls>
 			{hasImage && (
 				<div
 					className={`${BLOCK_CLASS_NAME}__image`}
-					style={{ width: imageContainerWidth, height: imageContainerHeight }}
+					style={{ width: `${imageContainerWidth}%`, height: imageContainerHeight }}
 				>
 					<MediaUploadCheck>
 						<MediaUpload
+							onSelect={onImageChange}
 							allowedTypes={ALLOWED_IMAGE_TYPES}
 							value={attachmentId}
-							onSelect={onImageSelect}
 							render={({ open }) => (
 								<Button
 									onClick={open}
-									className={`${BLOCK_CLASS_NAME}__upload${!imageSrc ? ' no-image' : ''}`}
-									text={!imageSrc ? __('Set image', 'innocode-block-cards') : ''}
+									icon={!!attachmentId && !imageSrc && <Icon icon={Spinner} />}
+									iconSize={46}
+									text={!imageSrc ? __('Set image', 'innocode-blocks') : ''}
+									label={__('Image', 'innocode-blocks')}
+									className={`${BLOCK_CLASS_NAME}__upload ${imageSrc ? `${BLOCK_CLASS_NAME}__upload_with-image` : ''}`}
 								>
 									{!!imageSrc && <img src={imageSrc} width={imageWidth} height={imageHeight} alt={imageAlt} />}
 								</Button>
 							)}
 						/>
+						{!!attachmentId && !!imageSrc && (
+							<Button
+								onClick={onImageRemove}
+								icon="dismiss"
+								label={__('Remove Image', 'innocode-blocks')}
+								className={`${BLOCK_CLASS_NAME}__remove-image`}
+							/>
+						)}
 					</MediaUploadCheck>
 				</div>
 			)}
-			{hasImage && !attachmentId && !!imageSrc && (
-				<div
-					className={`${BLOCK_CLASS_NAME}__image`}
-					style={{ width: imageContainerWidth, height: imageContainerHeight }}
-				>
-					<img src={imageSrc} width={imageWidth} height={imageHeight} alt={imageAlt} />
-				</div>
-			)}
-			<RichText
-				tagName={TITLE_TAG}
-				allowedFormats={['core/link']}
-				value={title}
-				placeholder={__('Title', 'innocode-block-cards')}
-				onChange={onTitleChange}
-				className={`${BLOCK_CLASS_NAME}__title`}
-			/>
-			{hasDescription && (
-				<RichText
-					tagName="div"
-					allowedFormats={['core/link']}
-					value={description}
-					placeholder={__('Description', 'innocode-block-cards')}
-					onChange={onDescriptionChange}
-					className={`${BLOCK_CLASS_NAME}__description`}
-				/>
-			)}
-			{hasLink && cardType === CARD_TYPE_DEF && (
-				<footer className={`${BLOCK_CLASS_NAME}__footer`}>
+			<div className={`${BLOCK_CLASS_NAME}__content`}>
+				<header className={`${BLOCK_CLASS_NAME}__header`}>
+					{hasTopSubtitle && (
+						<RichText
+							tagName="span"
+							multiline={false}
+							value={topSubtitle}
+							placeholder={__('Subtitle', 'innocode-blocks')}
+							onChange={onTopSubtitleChange}
+							className={`${BLOCK_CLASS_NAME}__subtitle ${BLOCK_CLASS_NAME}__subtitle_top`}
+						/>
+					)}
 					<RichText
-						tagName="a"
-						allowedFormats={[]}
-						value={linkText}
-						placeholder={__('Link text', 'innocode-block-cards')}
-						onChange={onLinkTextChange}
-						className={`${BLOCK_CLASS_NAME}__link`}
+						tagName={TITLE_TAG}
+						allowedFormats={['core/link']}
+						multiline={false}
+						value={title}
+						placeholder={__('Title', 'innocode-blocks')}
+						onChange={onTitleChange}
+						className={`${BLOCK_CLASS_NAME}__title`}
 					/>
-					<Button
-						icon={link}
-						title={__('Edit link url', 'innocode-block-cards')}
-						onClick={() => setIsEditingURL(true)}
-					/>
-					{isEditingURL && (
-						<Popover position="bottom center" onClose={() => setIsEditingURL(false)}>
-							<LinkControl
-								value={{ url: linkHref, opensInNewTab: linkTarget === '_blank' }}
-								onChange={onLinkChange}
-								forceIsEditingLink={isEditingURL}
-							/>
-						</Popover>
-					)}
-				</footer>
-			)}
-			{(hasPhone || hasEmail) && cardType === CARD_TYPE_CONTACT && (
-				<footer className={`${BLOCK_CLASS_NAME}__footer`}>
-					{hasPhone && (
+					{hasBottomSubtitle && (
 						<RichText
-							tagName="a"
-							allowedFormats={[]}
-							value={phone}
-							placeholder={__('Phone', 'innocode-block-cards')}
-							onChange={onPhoneChange}
-							className={`${BLOCK_CLASS_NAME}__phone`}
+							tagName="span"
+							multiline={false}
+							value={bottomSubtitle}
+							placeholder={__('Subtitle', 'innocode-blocks')}
+							onChange={onBottomSubtitleChange}
+							className={`${BLOCK_CLASS_NAME}__subtitle ${BLOCK_CLASS_NAME}__subtitle_bottom`}
 						/>
 					)}
-					{hasEmail && (
+				</header>
+				{hasDescription && (
+					<RichText
+						tagName="div"
+						multiline="p"
+						value={description}
+						placeholder={__('Description', 'innocode-blocks')}
+						onChange={onDescriptionChange}
+						className={`${BLOCK_CLASS_NAME}__description`}
+					/>
+				)}
+				{type === TYPE_DEFAULT && hasLink && (
+					<footer className={`${BLOCK_CLASS_NAME}__footer`}>
 						<RichText
+							ref={linkTextInputRef}
 							tagName="a"
 							allowedFormats={[]}
-							value={email}
-							placeholder={__('Email', 'innocode-block-cards')}
-							onChange={onEmailChange}
-							className={`${BLOCK_CLASS_NAME}__email`}
+							value={linkText}
+							placeholder={__('Link text', 'innocode-blocks')}
+							onChange={onLinkTextChange}
+							unstableOnFocus={startEditingURL}
+							onBlur={() => {
+								defer(() => {
+									const linkURLInput = linkURLInputRef.current;
+									let node = linkURLInput.ownerDocument.activeElement;
+
+									while (node) {
+										if (linkURLInput === node) {
+											return;
+										}
+
+										node = node.parentElement;
+
+										if (node === null) {
+											stopEditingURL();
+										}
+									}
+								});
+							}}
+							className={`${BLOCK_CLASS_NAME}__link`}
 						/>
-					)}
-				</footer>
-			)}
+						{isEditingURL && (
+							<Popover
+								ref={linkURLInputRef}
+								position="bottom center"
+								focusOnMount={false}
+								onClose={() => {
+									defer(() => {
+										const linkTextInput = linkTextInputRef.current;
+
+										if (linkTextInput.ownerDocument.activeElement !== linkTextInput) {
+											stopEditingURL();
+										}
+									});
+								}}
+							>
+								<LinkControl
+									value={{ url: linkHref, opensInNewTab: opensLinkInNewTab }}
+									onChange={onLinkChange}
+									forceIsEditingLink={isEditingURL}
+								/>
+							</Popover>
+						)}
+					</footer>
+				)}
+				{type === TYPE_CONTACT && (hasPhone || hasEmail) && (
+					<footer className={`${BLOCK_CLASS_NAME}__footer`}>
+						{hasPhone && (
+							<div className={`${BLOCK_CLASS_NAME}__phone`}>
+								<RichText
+									tagName="a"
+									allowedFormats={[]}
+									value={phone}
+									placeholder={__('Phone', 'innocode-blocks')}
+									onChange={onPhoneChange}
+								/>
+							</div>
+						)}
+						{hasEmail && (
+							<div className={`${BLOCK_CLASS_NAME}__email`}>
+								<RichText
+									tagName="a"
+									allowedFormats={[]}
+									value={email}
+									placeholder={__('Email', 'innocode-blocks')}
+									onChange={onEmailChange}
+								/>
+							</div>
+						)}
+					</footer>
+				)}
+			</div>
 		</div>
 	);
 }

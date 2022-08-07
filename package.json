@@ -27,7 +27,8 @@
 		"@wordpress/hooks": "^3.2.2",
 		"@wordpress/i18n": "^4.2.4",
 		"@wordpress/icons": "^9.2.0",
-		"@wordpress/primitives": "^3.0.4"
+		"@wordpress/primitives": "^3.0.4",
+		"lodash": "^4.17.21"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^19.2.2",

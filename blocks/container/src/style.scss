@@ -1,5 +1,6 @@
 /* stylelint-disable selector-class-pattern */
 .innocode-block-cards {
+	$self: &;
 	margin-bottom: 1em;
 
 	&__header {
@@ -14,24 +15,15 @@
 	&__list,
 	.block-editor-block-list__layout {
 		display: grid;
-		grid-template-columns: repeat(6, minmax(0, 1fr));
-		gap: 25px;
+		gap: 1em;
 	}
 
-	&.grid-4 {
-
-		.innocode-block-cards__list,
-		.block-editor-block-list__layout {
-			grid-template-columns: repeat(4, minmax(0, 1fr));
+	@each $columns in [1, 2, 3, 4, 5, 6] {
+		&_columns-#{$columns} {
+			#{ $self }__list,
+			.block-editor-block-list__layout {
+				grid-template-columns: repeat($columns, minmax(0, 1fr));
+			}
 		}
 	}
-
-	&.grid-3 {
-
-		.innocode-block-cards__list,
-		.block-editor-block-list__layout {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-		}
-	}
-
 }

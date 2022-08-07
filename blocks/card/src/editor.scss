@@ -1,28 +1,47 @@
-/* stylelint-disable selector-class-pattern */
-.editor-styles-wrapper {
+.innocode-block-card {
 
-	.innocode-block-card {
+	&__image {
+		position: relative;
+	}
 
-		.innocode-block-card__link,
-		.innocode-block-card__email {
-			color: #7ea7ac;
+	&__remove-image {
+		transition: opacity 0.3s;
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 2;
+		opacity: 0;
+		border-radius: 0;
+		background: rgba(0, 0, 0, 0.5);
+		color: #fff;
+	}
+
+	&__image:hover &__remove-image {
+		opacity: 1;
+	}
+
+	&__upload {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		min-height: 130px;
+		border: 1px solid #f0f0f0;
+		background-color: #f0f0f0;
+
+		&:hover,
+		&:active {
+			border-color: #ccc;
 		}
 
-		&__upload {
-			display: block;
-			width: 100%;
-			height: 100%;
+		&_with-image {
+			border: none;
 			border-radius: 0;
 
-			&.no-image {
-				background: #fff;
-			}
-		}
-
-		&__footer {
-
-			a {
-				outline: none !important;
+			&.components-button {
+				padding: 0;
 			}
 		}
 	}
