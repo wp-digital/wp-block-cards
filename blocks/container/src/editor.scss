@@ -10,4 +10,11 @@
 	&__list {
 		display: block;
 	}
+
+	.wp-block {
+
+		.editor-styles-wrapper & {
+			margin: 0;
+		}
+	}
 }
