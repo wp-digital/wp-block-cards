@@ -1,7 +1,7 @@
 {
 	"apiVersion": 2,
 	"name": "innocode/block-cards",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "title": "Cards",
 	"category": "design",
 	"description": "List for cards.",
