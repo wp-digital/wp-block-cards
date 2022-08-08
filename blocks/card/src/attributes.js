@@ -113,7 +113,7 @@ export default {
 	phone: {
 		type: 'string',
 		source: 'html',
-		selector: `.${BLOCK_CLASS_NAME}__phone`,
+		selector: `.${BLOCK_CLASS_NAME}__phone a`,
 	},
 	hasEmail: {
 		type: 'boolean',
@@ -122,7 +122,7 @@ export default {
 	email: {
 		type: 'string',
 		source: 'html',
-		selector: `.${BLOCK_CLASS_NAME}__email`,
+		selector: `.${BLOCK_CLASS_NAME}__email a`,
 	},
 	type: {
 		type: 'string',

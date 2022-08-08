@@ -33,12 +33,6 @@
 		margin-top: 1em;
 	}
 
-	&__phone,
-	&__email {
-		display: inline-block;
-		vertical-align: middle;
-	}
-
 	&__email:not(:only-child) {
 		margin-top: 0.5em;
 	}
