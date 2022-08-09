@@ -1,6 +1,6 @@
 {
 	"name": "wp-block-cards",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "Grid or carousel with card blocks which have an image, title, description and link.",
 	"author": "Innocode",
 	"license": "GPL-2.0-or-later",

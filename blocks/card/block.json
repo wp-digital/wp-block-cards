@@ -1,7 +1,7 @@
 {
 	"apiVersion": 2,
 	"name": "innocode/block-card",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "title": "Card",
 	"category": "design",
 	"description": "Card with an image, title, description and link.",
