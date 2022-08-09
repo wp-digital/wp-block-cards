@@ -24,6 +24,7 @@ export const HAS_TOP_SUBTITLE_DEFAULT = applyFilters('innocode.block-card.has_to
 export const HAS_BOTTOM_SUBTITLE_DEFAULT = applyFilters('innocode.block-card.has_bottom_subtitle.default', false);
 
 export const HAS_DESCRIPTION_DEFAULT = applyFilters('innocode.block-card.has_description.default', true);
+export const DESCRIPTION_ALIGNMENT_DEFAULT = applyFilters('innocode.block-card.description_alignment.default', 'none');
 
 export const HAS_LINK_DEFAULT = applyFilters('innocode.block-card.has_link.default', true);
 

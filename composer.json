@@ -1,6 +1,6 @@
 {
   "name": "innocode-digital/wp-block-cards",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "wordpress-plugin",
   "license": "GPL-2.0+",
   "require": {

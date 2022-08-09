@@ -7,6 +7,8 @@ import {
 	MediaUpload,
 	MediaUploadCheck,
 	InspectorControls,
+	BlockControls,
+	AlignmentToolbar,
 	/* eslint-disable-next-line @wordpress/no-unsafe-wp-apis */
 	__experimentalLinkControl as LinkControl,
 } from '@wordpress/block-editor';
@@ -26,6 +28,7 @@ import {
 	HAS_TOP_SUBTITLE_DEFAULT,
 	HAS_BOTTOM_SUBTITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
+	DESCRIPTION_ALIGNMENT_DEFAULT,
 	HAS_LINK_DEFAULT,
 	HAS_PHONE_DEFAULT,
 	HAS_EMAIL_DEFAULT,
@@ -50,6 +53,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 		bottomSubtitle,
 		hasDescription = HAS_DESCRIPTION_DEFAULT,
 		description,
+		descriptionAlignment = DESCRIPTION_ALIGNMENT_DEFAULT,
 		hasLink = HAS_LINK_DEFAULT,
 		linkHref,
 		linkText,
@@ -107,6 +111,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 	const onBottomSubtitleChange = (value) => onChange('bottomSubtitle', value);
 	const onHasDescriptionChange = () => onChange('hasDescription', !hasDescription);
 	const onDescriptionChange = (value) => onChange('description', value);
+	const onDescriptionAlignmentChange = (value) => onChange('descriptionAlignment', value);
 	const onHasLinkChange = () => onChange('hasLink', !hasLink);
 	const onToggleOpenLinkInNewTab = (value) => {
 		const newTarget = value ? '_blank' : undefined;
@@ -143,6 +148,12 @@ export default function Edit({ attributes, setAttributes, context }) {
 	useEffect(() => {
 		setAttributes({ type, imageContainerWidth, imageContainerHeight });
 	}, [type, imageContainerWidth, imageContainerHeight]);
+
+	let descriptionClassName = `${BLOCK_CLASS_NAME}__description`;
+
+	if (descriptionAlignment !== 'none') {
+		descriptionClassName += ` ${BLOCK_CLASS_NAME}__description_${descriptionAlignment}`;
+	}
 
 	return (
 		<div
@@ -270,14 +281,19 @@ export default function Edit({ attributes, setAttributes, context }) {
 					)}
 				</header>
 				{hasDescription && (
-					<RichText
-						tagName="div"
-						multiline="p"
-						value={description}
-						placeholder={__('Description', 'innocode-blocks')}
-						onChange={onDescriptionChange}
-						className={`${BLOCK_CLASS_NAME}__description`}
-					/>
+					<>
+						<BlockControls>
+							<AlignmentToolbar value={descriptionAlignment} onChange={onDescriptionAlignmentChange} />
+						</BlockControls>
+						<RichText
+							tagName="div"
+							multiline="p"
+							value={description}
+							placeholder={__('Description', 'innocode-blocks')}
+							onChange={onDescriptionChange}
+							className={descriptionClassName}
+						/>
+					</>
 				)}
 				{type === TYPE_DEFAULT && hasLink && (
 					<footer className={`${BLOCK_CLASS_NAME}__footer`}>

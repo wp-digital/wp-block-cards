@@ -8,6 +8,7 @@ import {
 	IMAGE_HEIGHT_DEFAULT,
 	COLUMNS_MAX,
 	COLUMNS_DEFAULT,
+	ALIGNMENT_DEFAULT,
 } from './constants';
 
 export default {
@@ -47,5 +48,9 @@ export default {
 		minimum: 1,
 		maximum: COLUMNS_MAX,
 		default: COLUMNS_DEFAULT,
+	},
+	alignment: {
+		type: 'string',
+		default: ALIGNMENT_DEFAULT,
 	},
 };

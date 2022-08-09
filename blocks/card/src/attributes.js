@@ -4,6 +4,7 @@ import {
 	HAS_TOP_SUBTITLE_DEFAULT,
 	HAS_BOTTOM_SUBTITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
+	DESCRIPTION_ALIGNMENT_DEFAULT,
 	HAS_IMAGE_DEFAULT,
 	HAS_LINK_DEFAULT,
 	HAS_PHONE_DEFAULT,
@@ -78,6 +79,10 @@ export default {
 		type: 'string',
 		source: 'html',
 		selector: `.${BLOCK_CLASS_NAME}__description`,
+	},
+	descriptionAlignment: {
+		type: 'string',
+		default: DESCRIPTION_ALIGNMENT_DEFAULT,
 	},
 	hasLink: {
 		type: 'boolean',

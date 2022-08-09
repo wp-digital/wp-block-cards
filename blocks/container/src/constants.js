@@ -16,4 +16,6 @@ export const IMAGE_HEIGHT_DEFAULT = applyFilters('innocode.block-cards.image.hei
 export const COLUMNS_MAX = applyFilters('innocode.block-cards.columns.max', 6);
 export const COLUMNS_DEFAULT = applyFilters('innocode.block-cards.columns.default', 3);
 
+export const ALIGNMENT_DEFAULT = applyFilters('innocode.block-cards.alignment.default', 'none');
+
 export const ALLOWED_BLOCKS = ['innocode/block-card'];

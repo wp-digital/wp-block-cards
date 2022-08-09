@@ -7,6 +7,7 @@ import {
 	HAS_TITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
 	COLUMNS_DEFAULT,
+	ALIGNMENT_DEFAULT,
 } from './constants';
 
 export default function save({ attributes }) {
@@ -16,7 +17,14 @@ export default function save({ attributes }) {
 		hasDescription = HAS_DESCRIPTION_DEFAULT,
 		description,
 		columns = COLUMNS_DEFAULT,
+		alignment = ALIGNMENT_DEFAULT,
 	} = attributes;
+
+	let listClassName = `${BLOCK_CLASS_NAME}__list`;
+
+	if (alignment !== 'none') {
+		listClassName += ` ${BLOCK_CLASS_NAME}__list_${alignment}`;
+	}
 
 	return (
 		<div
@@ -35,7 +43,7 @@ export default function save({ attributes }) {
 					/>
 				)}
 			</div>
-			<div className={`${BLOCK_CLASS_NAME}__list`}>
+			<div className={listClassName}>
 				<InnerBlocks.Content allowedBlocks={ALLOWED_BLOCKS} />
 			</div>
 		</div>

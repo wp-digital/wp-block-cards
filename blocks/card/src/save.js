@@ -12,6 +12,7 @@ import {
 	HAS_TOP_SUBTITLE_DEFAULT,
 	HAS_BOTTOM_SUBTITLE_DEFAULT,
 	HAS_DESCRIPTION_DEFAULT,
+	DESCRIPTION_ALIGNMENT_DEFAULT,
 	HAS_LINK_DEFAULT,
 	HAS_PHONE_DEFAULT,
 	HAS_EMAIL_DEFAULT,
@@ -31,6 +32,7 @@ export default function save({ attributes }) {
 		bottomSubtitle,
 		hasDescription = HAS_DESCRIPTION_DEFAULT,
 		description,
+		descriptionAlignment = DESCRIPTION_ALIGNMENT_DEFAULT,
 		hasLink = HAS_LINK_DEFAULT,
 		linkHref,
 		linkText,
@@ -44,6 +46,12 @@ export default function save({ attributes }) {
 		imageContainerWidth,
 		imageContainerHeight,
 	} = attributes;
+
+	let descriptionClassName = `${BLOCK_CLASS_NAME}__description`;
+
+	if (descriptionAlignment !== 'none') {
+		descriptionClassName += ` ${BLOCK_CLASS_NAME}__description_${descriptionAlignment}`;
+	}
 
 	return (
 		<div
@@ -80,7 +88,7 @@ export default function save({ attributes }) {
 					)}
 				</header>
 				{hasDescription && !!description && (
-					<RichText.Content tagName="div" value={description} className={`${BLOCK_CLASS_NAME}__description`} />
+					<RichText.Content tagName="div" value={description} className={descriptionClassName} />
 				)}
 				{type === TYPE_DEFAULT && hasLink && !!linkText && !!linkHref && (
 					<footer className={`${BLOCK_CLASS_NAME}__footer`}>

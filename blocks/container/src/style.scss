@@ -12,17 +12,34 @@
 		text-align: center;
 	}
 
-	&__list,
-	.block-editor-block-list__layout {
-		display: grid;
-		gap: 1em;
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+
+		&_left {
+			justify-content: flex-start;
+		}
+
+		&_center {
+			justify-content: center;
+		}
+
+		&_right {
+			justify-content: flex-end;
+		}
+
+		> * {
+			margin: 0 0.5em 1em;
+		}
 	}
 
 	@each $columns in [1, 2, 3, 4, 5, 6] {
-		&_columns-#{$columns} {
-			#{ $self }__list,
-			.block-editor-block-list__layout {
-				grid-template-columns: repeat($columns, minmax(0, 1fr));
+		&_columns-#{ $columns } {
+			#{ $self }__list {
+
+				> * {
+					width: calc((100% - #{ $columns }em) / $columns);
+				}
 			}
 		}
 	}

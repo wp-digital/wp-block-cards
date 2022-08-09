@@ -1,4 +1,6 @@
+/* stylelint-disable selector-class-pattern */
 .innocode-block-cards {
+	$self: &;
 
 	&__title {
 
@@ -9,12 +11,49 @@
 
 	&__list {
 		display: block;
+
+		&_left .block-editor-block-list__layout {
+			justify-content: flex-start;
+		}
+
+		&_center .block-editor-block-list__layout {
+			justify-content: center;
+		}
+
+		&_right .block-editor-block-list__layout {
+			justify-content: flex-end;
+		}
+
+		> * {
+			margin: 0;
+		}
 	}
 
-	.wp-block {
+	.block-editor-block-list__layout {
+		display: flex;
+		flex-wrap: wrap;
 
-		.editor-styles-wrapper & {
-			margin: 0;
+		> * {
+			margin: 0 0.5em 1em;
+		}
+	}
+
+	@each $columns in [1, 2, 3, 4, 5, 6] {
+		&_columns-#{ $columns } {
+
+			#{ $self }__list {
+
+				> * {
+					width: auto;
+				}
+			}
+
+			.block-editor-block-list__layout {
+
+				> * {
+					width: calc((100% - #{ $columns }em) / $columns);
+				}
+			}
 		}
 	}
 }

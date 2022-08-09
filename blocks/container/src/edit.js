@@ -2,7 +2,14 @@
 
 import { range } from 'lodash';
 
-import { useBlockProps, InnerBlocks, InspectorControls, RichText } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	InnerBlocks,
+	InspectorControls,
+	RichText,
+	BlockControls,
+	AlignmentToolbar,
+} from '@wordpress/block-editor';
 import {
 	PanelBody,
 	PanelRow,
@@ -26,6 +33,7 @@ import {
 	IMAGE_HEIGHT_DEFAULT,
 	COLUMNS_MAX,
 	COLUMNS_DEFAULT,
+	ALIGNMENT_DEFAULT,
 	ALLOWED_BLOCKS,
 } from './constants';
 
@@ -41,6 +49,7 @@ export default function Edit({ attributes, setAttributes }) {
 		imageWidth = IMAGE_WIDTH_DEFAULT,
 		imageHeight = IMAGE_HEIGHT_DEFAULT,
 		columns = COLUMNS_DEFAULT,
+		alignment = ALIGNMENT_DEFAULT,
 	} = attributes;
 
 	const onChange = (key, value) => {
@@ -55,6 +64,13 @@ export default function Edit({ attributes, setAttributes }) {
 	const onImageWidthChange = (value) => onChange('imageWidth', value);
 	const onImageHeightChange = (value) => onChange('imageHeight', parseInt(value, 10));
 	const onColumnsChange = (value) => onChange('columns', value);
+	const onAlignmentChange = (value) => onChange('alignment', value);
+
+	let listClassName = `${BLOCK_CLASS_NAME}__list`;
+
+	if (alignment !== 'none') {
+		listClassName += ` ${BLOCK_CLASS_NAME}__list_${alignment}`;
+	}
 
 	return (
 		<div
@@ -146,7 +162,10 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				)}
 			</div>
-			<div className={`${BLOCK_CLASS_NAME}__list`}>
+			<div className={listClassName}>
+				<BlockControls>
+					<AlignmentToolbar value={alignment} onChange={onAlignmentChange} />
+				</BlockControls>
 				<InnerBlocks allowedBlocks={ALLOWED_BLOCKS} orientation="horizontal" />
 			</div>
 		</div>
