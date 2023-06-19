@@ -79,19 +79,19 @@ export default function Edit({ attributes, setAttributes }) {
 			})}
 		>
 			<InspectorControls>
-				<PanelBody title={__('Settings', 'innocode-blocks')}>
+				<PanelBody title={__('Settings', 'wpd-blocks')}>
 					<PanelRow>
-						<ToggleControl label={__('Show title', 'innocode-blocks')} checked={hasTitle} onChange={onHasTitleChange} />
+						<ToggleControl label={__('Show title', 'wpd-blocks')} checked={hasTitle} onChange={onHasTitleChange} />
 					</PanelRow>
 					<PanelRow>
 						<ToggleControl
-							label={__('Show description', 'innocode-blocks')}
+							label={__('Show description', 'wpd-blocks')}
 							checked={hasDescription}
 							onChange={onHasDescriptionChange}
 						/>
 					</PanelRow>
 					<PanelRow>
-						<legend className="blocks-base-control__label">{__('Columns', 'innocode-blocks')}</legend>
+						<legend className="blocks-base-control__label">{__('Columns', 'wpd-blocks')}</legend>
 						<RadioGroup onChange={onColumnsChange} checked={columns}>
 							{range(1, COLUMNS_MAX + 1).map((i) => (
 								<Radio key={i} value={i}>
@@ -102,15 +102,15 @@ export default function Edit({ attributes, setAttributes }) {
 					</PanelRow>
 					<PanelRow>
 						<RadioControl
-							label={__('Card type', 'innocode-blocks')}
+							label={__('Card type', 'wpd-blocks')}
 							selected={cardType}
 							options={[
 								{
-									label: __('Default', 'innocode-blocks'),
+									label: __('Default', 'wpd-blocks'),
 									value: TYPE_DEFAULT,
 								},
 								{
-									label: __('Contact', 'innocode-blocks'),
+									label: __('Contact', 'wpd-blocks'),
 									value: TYPE_CONTACT,
 								},
 							]}
@@ -119,7 +119,7 @@ export default function Edit({ attributes, setAttributes }) {
 					</PanelRow>
 					<PanelRow>
 						<RangeControl
-							label={__('Image width', 'innocode-blocks')}
+							label={__('Image width', 'wpd-blocks')}
 							value={imageWidth}
 							onChange={onImageWidthChange}
 							allowReset
@@ -131,7 +131,7 @@ export default function Edit({ attributes, setAttributes }) {
 					</PanelRow>
 					<PanelRow>
 						<NumberControl
-							label={__('Image height', 'innocode-blocks')}
+							label={__('Image height', 'wpd-blocks')}
 							value={imageHeight}
 							onChange={onImageHeightChange}
 							isDragEnabled
@@ -146,7 +146,7 @@ export default function Edit({ attributes, setAttributes }) {
 					<RichText
 						tagName={TITLE_TAG}
 						value={title}
-						placeholder={__('Title', 'innocode-blocks')}
+						placeholder={__('Title', 'wpd-blocks')}
 						onChange={onTitleChange}
 						className={`${BLOCK_CLASS_NAME}__title`}
 					/>
@@ -156,7 +156,7 @@ export default function Edit({ attributes, setAttributes }) {
 						tagName="div"
 						multiline="p"
 						value={description}
-						placeholder={__('Description', 'innocode-blocks')}
+						placeholder={__('Description', 'wpd-blocks')}
 						onChange={onDescriptionChange}
 						className={`${BLOCK_CLASS_NAME}__description`}
 					/>

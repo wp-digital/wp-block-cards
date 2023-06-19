@@ -65,9 +65,9 @@ export default function Edit({ attributes, setAttributes, context }) {
 		email,
 	} = attributes;
 	const {
-		'innocode/block-cards-cardType': type,
-		'innocode/block-cards-imageWidth': imageContainerWidth,
-		'innocode/block-cards-imageHeight': imageContainerHeight,
+		'wpd/block-cards-cardType': type,
+		'wpd/block-cards-imageWidth': imageContainerWidth,
+		'wpd/block-cards-imageHeight': imageContainerHeight,
 	} = context;
 	const [isEditingURL, setIsEditingURL] = useState(false);
 	const opensLinkInNewTab = linkTarget === '_blank';
@@ -162,52 +162,44 @@ export default function Edit({ attributes, setAttributes, context }) {
 			})}
 		>
 			<InspectorControls>
-				<PanelBody title={__('Settings', 'innocode-blocks')}>
+				<PanelBody title={__('Settings', 'wpd-blocks')}>
 					<PanelRow>
-						<ToggleControl label={__('Show image', 'innocode-blocks')} checked={hasImage} onChange={onHasImageChange} />
+						<ToggleControl label={__('Show image', 'wpd-blocks')} checked={hasImage} onChange={onHasImageChange} />
 					</PanelRow>
 					<PanelRow>
 						<ToggleControl
-							label={__('Show description', 'innocode-blocks')}
+							label={__('Show description', 'wpd-blocks')}
 							checked={hasDescription}
 							onChange={onHasDescriptionChange}
 						/>
 					</PanelRow>
 					{type === TYPE_DEFAULT && (
 						<PanelRow>
-							<ToggleControl label={__('Show link', 'innocode-blocks')} checked={hasLink} onChange={onHasLinkChange} />
+							<ToggleControl label={__('Show link', 'wpd-blocks')} checked={hasLink} onChange={onHasLinkChange} />
 						</PanelRow>
 					)}
 					{type === TYPE_CONTACT && (
 						<>
 							<PanelRow>
-								<ToggleControl
-									label={__('Show phone', 'innocode-blocks')}
-									checked={hasPhone}
-									onChange={onHasPhoneChange}
-								/>
+								<ToggleControl label={__('Show phone', 'wpd-blocks')} checked={hasPhone} onChange={onHasPhoneChange} />
 							</PanelRow>
 							<PanelRow>
-								<ToggleControl
-									label={__('Show email', 'innocode-blocks')}
-									checked={hasEmail}
-									onChange={onHasEmailChange}
-								/>
+								<ToggleControl label={__('Show email', 'wpd-blocks')} checked={hasEmail} onChange={onHasEmailChange} />
 							</PanelRow>
 						</>
 					)}
 				</PanelBody>
-				<PanelBody title={__('Subtitle Settings', 'innocode-blocks')} initialOpen={false}>
+				<PanelBody title={__('Subtitle Settings', 'wpd-blocks')} initialOpen={false}>
 					<PanelRow>
 						<ToggleControl
-							label={__('Show before title', 'innocode-blocks')}
+							label={__('Show before title', 'wpd-blocks')}
 							checked={hasTopSubtitle}
 							onChange={onHasTopSubtitleChange}
 						/>
 					</PanelRow>
 					<PanelRow>
 						<ToggleControl
-							label={__('Show after title', 'innocode-blocks')}
+							label={__('Show after title', 'wpd-blocks')}
 							checked={hasBottomSubtitle}
 							onChange={onHasBottomSubtitleChange}
 						/>
@@ -229,8 +221,8 @@ export default function Edit({ attributes, setAttributes, context }) {
 									onClick={open}
 									icon={!!attachmentId && !imageSrc && <Icon icon={Spinner} />}
 									iconSize={46}
-									text={!imageSrc ? __('Set image', 'innocode-blocks') : ''}
-									label={__('Image', 'innocode-blocks')}
+									text={!imageSrc ? __('Set image', 'wpd-blocks') : ''}
+									label={__('Image', 'wpd-blocks')}
 									className={`${BLOCK_CLASS_NAME}__upload ${imageSrc ? `${BLOCK_CLASS_NAME}__upload_with-image` : ''}`}
 								>
 									{!!imageSrc && <img src={imageSrc} width={imageWidth} height={imageHeight} alt={imageAlt} />}
@@ -241,7 +233,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 							<Button
 								onClick={onImageRemove}
 								icon="dismiss"
-								label={__('Remove Image', 'innocode-blocks')}
+								label={__('Remove Image', 'wpd-blocks')}
 								className={`${BLOCK_CLASS_NAME}__remove-image`}
 							/>
 						)}
@@ -255,7 +247,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 							tagName="span"
 							multiline={false}
 							value={topSubtitle}
-							placeholder={__('Subtitle', 'innocode-blocks')}
+							placeholder={__('Subtitle', 'wpd-blocks')}
 							onChange={onTopSubtitleChange}
 							className={`${BLOCK_CLASS_NAME}__subtitle ${BLOCK_CLASS_NAME}__subtitle_top`}
 						/>
@@ -265,7 +257,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 						allowedFormats={['core/link']}
 						multiline={false}
 						value={title}
-						placeholder={__('Title', 'innocode-blocks')}
+						placeholder={__('Title', 'wpd-blocks')}
 						onChange={onTitleChange}
 						className={`${BLOCK_CLASS_NAME}__title`}
 					/>
@@ -274,7 +266,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 							tagName="span"
 							multiline={false}
 							value={bottomSubtitle}
-							placeholder={__('Subtitle', 'innocode-blocks')}
+							placeholder={__('Subtitle', 'wpd-blocks')}
 							onChange={onBottomSubtitleChange}
 							className={`${BLOCK_CLASS_NAME}__subtitle ${BLOCK_CLASS_NAME}__subtitle_bottom`}
 						/>
@@ -289,7 +281,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 							tagName="div"
 							multiline="p"
 							value={description}
-							placeholder={__('Description', 'innocode-blocks')}
+							placeholder={__('Description', 'wpd-blocks')}
 							onChange={onDescriptionChange}
 							className={descriptionClassName}
 						/>
@@ -302,7 +294,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 							tagName="a"
 							allowedFormats={[]}
 							value={linkText}
-							placeholder={__('Link text', 'innocode-blocks')}
+							placeholder={__('Link text', 'wpd-blocks')}
 							onChange={onLinkTextChange}
 							unstableOnFocus={startEditingURL}
 							onBlur={() => {
@@ -357,7 +349,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 									tagName="a"
 									allowedFormats={[]}
 									value={phone}
-									placeholder={__('Phone', 'innocode-blocks')}
+									placeholder={__('Phone', 'wpd-blocks')}
 									onChange={onPhoneChange}
 								/>
 							</div>
@@ -368,7 +360,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 									tagName="a"
 									allowedFormats={[]}
 									value={email}
-									placeholder={__('Email', 'innocode-blocks')}
+									placeholder={__('Email', 'wpd-blocks')}
 									onChange={onEmailChange}
 								/>
 							</div>

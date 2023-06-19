@@ -6,21 +6,21 @@ Grid or carousel with card blocks which have an image, title, description and li
 
 ### Demo
 
-[Cards Block](https://blocks.innocode.digital/cards-block/)
+[Cards Block](https://blocks.wpd.digital/cards-block/)
 
 ### Install
 
 - Preferable way is to use [Composer](https://getcomposer.org/):
 
     ````
-    composer require innocode-digital/wp-block-cards
+    composer require wpd-digital/wp-block-cards
     ````
 
 - Alternate way is to clone this repo to `wp-content/plugins/`:
 
     ````
     cd wp-content/plugins/
-    git clone git@github.com:innocode-digital/wp-block-cards.git
+    git clone git@github.com:wpd-digital/wp-block-cards.git
     ````
 
 Activate **Cards Block** with [WP-CLI](https://make.wordpress.org/cli/handbook/)

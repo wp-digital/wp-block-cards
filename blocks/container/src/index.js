@@ -7,7 +7,7 @@ import icon from './icon';
 
 import './style.scss';
 
-registerBlockType('innocode/block-cards', {
+registerBlockType('wpd/block-cards', {
 	apiVersion: 2,
 	supports: {
 		align: ['wide', 'full'],
@@ -15,9 +15,9 @@ registerBlockType('innocode/block-cards', {
 	},
 	attributes,
 	providesContext: {
-		'innocode/block-cards-cardType': 'cardType',
-		'innocode/block-cards-imageWidth': 'imageWidth',
-		'innocode/block-cards-imageHeight': 'imageHeight',
+		'wpd/block-cards-cardType': 'cardType',
+		'wpd/block-cards-imageWidth': 'imageWidth',
+		'wpd/block-cards-imageHeight': 'imageHeight',
 	},
 	edit: Edit,
 	save,

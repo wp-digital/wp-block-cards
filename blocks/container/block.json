@@ -1,14 +1,14 @@
 {
 	"apiVersion": 2,
-	"name": "innocode/block-cards",
-    "version": "1.1.1",
-    "title": "Cards",
+	"name": "wpd/block-cards",
+	"version": "1.2.0",
+	"title": "Cards",
 	"category": "design",
 	"description": "List for cards.",
 	"supports": {
 		"html": false
 	},
-	"textdomain": "innocode-blocks",
+	"textdomain": "wpd-blocks",
 	"editorScript": "file:./build/index.js",
 	"editorStyle": "file:./build/index.css",
 	"style": "file:./build/style-index.css"
