@@ -4,7 +4,7 @@
  * Description:       Grid or carousel with card blocks which have an image, title, description and link.
  * Requires at least: 5.8
  * Requires PHP:      7.1
- * Version:           1.1.1
+ * Version:           1.2.0
  * Author:            SMFB Dinamo
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
