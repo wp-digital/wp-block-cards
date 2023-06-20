@@ -147,7 +147,7 @@ export default function Edit({ attributes, setAttributes, context }) {
 
 	useEffect(() => {
 		setAttributes({ type, imageContainerWidth, imageContainerHeight });
-	}, [type, imageContainerWidth, imageContainerHeight]);
+	}, [setAttributes, type, imageContainerWidth, imageContainerHeight]);
 
 	let descriptionClassName = `${BLOCK_CLASS_NAME}__description`;
 
