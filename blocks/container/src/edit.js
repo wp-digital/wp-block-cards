@@ -35,6 +35,7 @@ import {
 	COLUMNS_DEFAULT,
 	ALIGNMENT_DEFAULT,
 	ALLOWED_BLOCKS,
+	TEMPLATE,
 } from './constants';
 
 import './editor.scss';
@@ -166,7 +167,7 @@ export default function Edit({ attributes, setAttributes }) {
 				<BlockControls>
 					<AlignmentToolbar value={alignment} onChange={onAlignmentChange} />
 				</BlockControls>
-				<InnerBlocks allowedBlocks={ALLOWED_BLOCKS} orientation="horizontal" />
+				<InnerBlocks allowedBlocks={ALLOWED_BLOCKS} orientation="horizontal" template={TEMPLATE} />
 			</div>
 		</div>
 	);

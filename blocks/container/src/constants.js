@@ -19,3 +19,5 @@ export const COLUMNS_DEFAULT = applyFilters('wpd.block-cards.columns.default', 3
 export const ALIGNMENT_DEFAULT = applyFilters('wpd.block-cards.alignment.default', 'none');
 
 export const ALLOWED_BLOCKS = ['wpd/block-card'];
+
+export const TEMPLATE = applyFilters('wpd.block-cards.template', [['wpd/block-card', {}]]);

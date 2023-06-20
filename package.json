@@ -1,6 +1,6 @@
 {
 	"name": "wp-block-cards",
-	"version": "1.3.2",
+	"version": "1.3.3",
 	"description": "Grid or carousel with card blocks which have an image, title, description and link.",
 	"author": "SMFB Dinamo",
 	"license": "GPL-2.0-or-later",
