@@ -1,6 +1,6 @@
 {
 	"name": "wpd-digital/wp-block-cards",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"type": "wordpress-plugin",
 	"license": "GPL-2.0+",
 	"require": {

@@ -6,7 +6,7 @@ Grid or carousel with card blocks which have an image, title, description and li
 
 ### Demo
 
-[Cards Block](https://blocks.wpd.digital/cards-block/)
+[Cards Block](https://demo.wpd.digital/cards-block/)
 
 ### Install
 
